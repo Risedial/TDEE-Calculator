@@ -1,0 +1,166 @@
+{
+  "name": "Calorie Calculator - Offline PWA",
+  "short_name": "CalCalc",
+  "description": "Calculate your daily calorie needs and TDEE using the Mifflin-St Jeor equation. Works completely offline with no data tracking.",
+  "version": "1.0.0",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#2196F3",
+  "background_color": "#FAFAFA",
+  "scope": "./",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["health", "fitness", "lifestyle", "utilities"],
+  "screenshots": [
+    {
+      "src": "./screenshots/mobile-screenshot-1.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Main calculator interface on mobile"
+    },
+    {
+      "src": "./screenshots/desktop-screenshot-1.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Calculator interface on desktop"
+    }
+  ],
+  "icons": [
+    {
+      "src": "./icons/icon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick Calculate",
+      "short_name": "Calculate",
+      "description": "Jump directly to the calorie calculator",
+      "url": "./index.html#calculator",
+      "icons": [
+        {
+          "src": "./icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Reset Calculator",
+      "short_name": "Reset",
+      "description": "Reset the calculator for a new calculation",
+      "url": "./index.html?reset=true",
+      "icons": [
+        {
+          "src": "./icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+calorie",
+      "url": "./index.html?data=%s"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "file_handlers": [
+    {
+      "action": "./index.html",
+      "accept": {
+        "application/json": [".json"],
+        "text/csv": [".csv"]
+      }
+    }
+  ],
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+} 

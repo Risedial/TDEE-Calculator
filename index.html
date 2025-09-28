@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="description" content="Offline calorie calculator and TDEE calculator for weight management">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <title>Calorie Calculator - Offline PWA</title>
+</head>
+<body>
+    <!-- Skip to main content for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <h1 class="header__title">
+                <span class="header__icon" aria-hidden="true">🧮</span>
+                Calorie Calculator
+            </h1>
+            <p class="header__subtitle">Calculate your daily calorie needs offline</p>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="main" role="main">
+        <div class="container">
+            <!-- Unit Toggle -->
+            <section class="unit-toggle" aria-labelledby="unit-toggle-label">
+                <h2 id="unit-toggle-label" class="visually-hidden">Unit System</h2>
+                <div class="toggle-switch" role="switch" tabindex="0" aria-checked="false" 
+                     aria-labelledby="unit-toggle-label" aria-describedby="unit-toggle-desc">
+                    <span class="toggle-switch__label toggle-switch__label--metric">Metric</span>
+                    <div class="toggle-switch__slider">
+                        <div class="toggle-switch__thumb"></div>
+                    </div>
+                    <span class="toggle-switch__label toggle-switch__label--imperial">Imperial</span>
+                </div>
+                <p id="unit-toggle-desc" class="toggle-switch__description">
+                    Switch between metric (kg, cm) and imperial (lbs, ft/in) units
+                </p>
+            </section>
+            
+            <!-- Calculator Form -->
+            <section class="calculator" aria-labelledby="calculator-title">
+                <h2 id="calculator-title" class="calculator__title">Personal Information</h2>
+                
+                <form class="calculator__form" id="calorie-form" novalidate>
+                    <!-- Age Input -->
+                    <div class="input-group">
+                        <label for="age" class="input-label">
+                            Age
+                            <span class="input-label__required" aria-label="required">*</span>
+                        </label>
+                        <input type="number" id="age" name="age" class="input-field" 
+                               min="1" max="120" step="1" required
+                               aria-describedby="age-error age-hint">
+                        <div id="age-hint" class="input-hint">Enter your age in years</div>
+                        <div id="age-error" class="input-error" role="alert" aria-live="polite"></div>
+                    </div>
+                    
+                    <!-- Gender Selection -->
+                    <div class="input-group">
+                        <fieldset class="input-fieldset">
+                            <legend class="input-label">
+                                Gender
+                                <span class="input-label__required" aria-label="required">*</span>
+                            </legend>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="gender-male" name="gender" value="male" 
+                                           class="radio-input" required>
+                                    <label for="gender-male" class="radio-label">Male</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="gender-female" name="gender" value="female" 
+                                           class="radio-input" required>
+                                    <label for="gender-female" class="radio-label">Female</label>
+                                </div>
+                            </div>
+                            <div id="gender-error" class="input-error" role="alert" aria-live="polite"></div>
+                        </fieldset>
+                    </div>
+                    
+                    <!-- Height Input -->
+                    <div class="input-group">
+                        <label for="height" class="input-label">
+                            <span class="height-label-text">Height (cm)</span>
+                            <span class="input-label__required" aria-label="required">*</span>
+                        </label>
+                        <div class="height-input-container">
+                            <input type="number" id="height" name="height" class="input-field" 
+                                   min="1" max="300" step="0.1" required
+                                   aria-describedby="height-error height-hint">
+                            <!-- Imperial height inputs (hidden by default) -->
+                            <div class="imperial-height" style="display: none;">
+                                <input type="number" id="height-feet" name="height-feet" class="input-field input-field--small" 
+                                       min="1" max="9" step="1" placeholder="ft"
+                                       aria-label="Height in feet">
+                                <span class="input-separator">ft</span>
+                                <input type="number" id="height-inches" name="height-inches" class="input-field input-field--small" 
+                                       min="0" max="11" step="1" placeholder="in"
+                                       aria-label="Height in inches">
+                                <span class="input-separator">in</span>
+                            </div>
+                        </div>
+                        <div id="height-hint" class="input-hint">Enter your height</div>
+                        <div id="height-error" class="input-error" role="alert" aria-live="polite"></div>
+                    </div>
+                    
+                    <!-- Weight Input -->
+                    <div class="input-group">
+                        <label for="weight" class="input-label">
+                            <span class="weight-label-text">Weight (kg)</span>
+                            <span class="input-label__required" aria-label="required">*</span>
+                        </label>
+                        <input type="number" id="weight" name="weight" class="input-field" 
+                               min="1" max="1000" step="0.1" required
+                               aria-describedby="weight-error weight-hint">
+                        <div id="weight-hint" class="input-hint">Enter your current weight</div>
+                        <div id="weight-error" class="input-error" role="alert" aria-live="polite"></div>
+                    </div>
+                    
+                    <!-- Activity Level -->
+                    <div class="input-group">
+                        <label for="activity-level" class="input-label">
+                            Activity Level
+                            <span class="input-label__required" aria-label="required">*</span>
+                        </label>
+                        <select id="activity-level" name="activity-level" class="input-field select-field" required
+                                aria-describedby="activity-error activity-hint">
+                            <option value="">Select your activity level</option>
+                            <option value="1.2">Sedentary (little to no exercise)</option>
+                            <option value="1.375">Lightly active (light exercise 1-3 days/week)</option>
+                            <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
+                            <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
+                            <option value="1.9">Extremely active (very hard exercise, physical job)</option>
+                        </select>
+                        <div id="activity-hint" class="input-hint">Choose the option that best describes your lifestyle</div>
+                        <div id="activity-error" class="input-error" role="alert" aria-live="polite"></div>
+                    </div>
+                    
+                    <!-- Calculate Button -->
+                    <button type="submit" class="btn btn--primary btn--large" id="calculate-btn">
+                        <span class="btn__text">Calculate Calories</span>
+                        <span class="btn__loading" aria-hidden="true">⏳</span>
+                    </button>
+                </form>
+            </section>
+            
+            <!-- Results Section -->
+            <section class="results" id="results-section" style="display: none;" 
+                     aria-labelledby="results-title" aria-live="polite">
+                <h2 id="results-title" class="results__title">Your Daily Calorie Needs</h2>
+                
+                <div class="results__content">
+                    <!-- BMR Result -->
+                    <div class="result-card">
+                        <h3 class="result-card__title">Basal Metabolic Rate (BMR)</h3>
+                        <div class="result-card__value" id="bmr-result">
+                            <span class="result-value">0</span>
+                            <span class="result-unit">calories/day</span>
+                        </div>
+                        <p class="result-card__description">
+                            Calories needed for basic body functions at rest
+                        </p>
+                    </div>
+                    
+                    <!-- TDEE Result -->
+                    <div class="result-card result-card--primary">
+                        <h3 class="result-card__title">Total Daily Energy Expenditure (TDEE)</h3>
+                        <div class="result-card__value" id="tdee-result">
+                            <span class="result-value">0</span>
+                            <span class="result-unit">calories/day</span>
+                        </div>
+                        <p class="result-card__description">
+                            Total calories needed to maintain current weight
+                        </p>
+                    </div>
+                    
+                    <!-- Weight Management Goals -->
+                    <div class="weight-goals">
+                        <h3 class="weight-goals__title">Weight Management Goals</h3>
+                        
+                        <div class="goal-card">
+                            <h4 class="goal-card__title">Weight Loss</h4>
+                            <div class="goal-options">
+                                <div class="goal-option">
+                                    <span class="goal-option__label">Mild (0.5 lbs/week)</span>
+                                    <span class="goal-option__value" id="loss-mild">0 cal/day</span>
+                                </div>
+                                <div class="goal-option">
+                                    <span class="goal-option__label">Moderate (1 lb/week)</span>
+                                    <span class="goal-option__value" id="loss-moderate">0 cal/day</span>
+                                </div>
+                                <div class="goal-option">
+                                    <span class="goal-option__label">Aggressive (2 lbs/week)</span>
+                                    <span class="goal-option__value" id="loss-aggressive">0 cal/day</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="goal-card">
+                            <h4 class="goal-card__title">Weight Gain</h4>
+                            <div class="goal-options">
+                                <div class="goal-option">
+                                    <span class="goal-option__label">Mild (0.5 lbs/week)</span>
+                                    <span class="goal-option__value" id="gain-mild">0 cal/day</span>
+                                </div>
+                                <div class="goal-option">
+                                    <span class="goal-option__label">Moderate (1 lb/week)</span>
+                                    <span class="goal-option__value" id="gain-moderate">0 cal/day</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reset Button -->
+                    <button type="button" class="btn btn--secondary" id="reset-btn">
+                        Calculate Again
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p class="footer__text">
+                This calculator uses the Mifflin-St Jeor equation for accurate results.
+                <br>
+                <strong>Works completely offline</strong> - your data stays private on your device.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Notification Toast -->
+    <div class="toast" id="notification-toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast__content">
+            <span class="toast__icon" aria-hidden="true"></span>
+            <span class="toast__message" id="toast-message"></span>
+        </div>
+        <button class="toast__close" aria-label="Close notification">×</button>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 
