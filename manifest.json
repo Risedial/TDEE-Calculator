@@ -1,5 +1,5 @@
 {
-  "name": "Calorie Calculator - Offline PWA",
+  "name": "Calorie Calculator",
   "short_name": "CalCalc",
   "description": "Calculate your daily calorie needs and TDEE using the Mifflin-St Jeor equation. Works completely offline with no data tracking.",
   "version": "1.0.0",
@@ -163,4 +163,5 @@
   "launch_handler": {
     "client_mode": "navigate-existing"
   }
+
 } 
