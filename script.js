@@ -636,32 +636,31 @@ const App = {
     /**
      * Initialize the application
      */
-    init: () => {
-        // Cache DOM elements
-        AppState.form = document.getElementById('calorie-form');
-        AppState.elements = {
-            unitToggle: document.querySelector('.toggle-switch'),
-            calculateBtn: document.getElementById('calculate-btn'),
-            resetBtn: document.getElementById('reset-btn'),
-            resultsSection: document.getElementById('results-section'),
-            bmrResult: document.getElementById('bmr-result'),
-            tdeeResult: document.getElementById('tdee-result'),
-            toast: document.getElementById('notification-toast'),
-            toastMessage: document.getElementById('toast-message')
-        };
-        
-        // Set up event listeners
-        App.setupEventListeners();
-        
-        // Initialize UI state
-        UI.updateInputLabels();
-        
-        // Register service worker for PWA
-        App.registerServiceWorker();
-        
-        
-        console.log('Calorie Calculator PWA initialized successfully');
-    },
+init: () => {
+    // Cache DOM elements
+    AppState.form = document.getElementById('calorie-form');
+    AppState.elements = {
+        unitToggle: document.querySelector('.toggle-switch'),
+        calculateBtn: document.getElementById('calculate-btn'),
+        resetBtn: document.getElementById('reset-btn'),
+        resultsSection: document.getElementById('results-section'),
+        bmrResult: document.getElementById('bmr-result'),
+        tdeeResult: document.getElementById('tdee-result'),
+        toast: document.getElementById('notification-toast'),
+        toastMessage: document.getElementById('toast-message')
+    };
+    
+    // Set up event listeners
+    App.setupEventListeners();
+    
+    // Initialize UI state
+    UI.updateInputLabels();
+    
+    // Register service worker for PWA
+    App.registerServiceWorker();
+
+    console.log('Calorie Calculator PWA initialized successfully');
+},
     
     /**
      * Set up all event listeners
@@ -732,4 +731,5 @@ if (document.readyState === 'loading') {
     App.init();
 
 } 
+
 
