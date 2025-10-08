@@ -660,7 +660,7 @@ const App = {
         App.registerServiceWorker();
         
         // Show welcome message
-        UI.showToast('Welcome! Calculator is ready to use offline.', 'success');
+        // UI.showToast('Welcome! Calculator is ready to use offline.', 'success');
         
         console.log('Calorie Calculator PWA initialized successfully');
     },
@@ -732,4 +732,5 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', App.init);
 } else {
     App.init();
+
 } 
